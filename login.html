@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<center><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Authentication</title>
+    <script>
+        function register() {
+            var username = document.getElementById("regUsername").value;
+            var password = document.getElementById("regPassword").value;
+
+            // Check if username already exists
+            if (localStorage.getItem(username)) {
+                alert("Username already exists. Please choose another one.");
+                return;
+            }
+
+            // Store user credentials
+            localStorage.setItem(username, password);
+            alert("Registration successful!");
+        }
+
+        function login() {
+            var username = document.getElementById("loginUsername").value;
+            var password = document.getElementById("loginPassword").value;
+
+            // Check if user exists and password matches
+            var storedPassword = localStorage.getItem(username);
+            if (storedPassword && password === storedPassword) {
+                alert("Login successful!");
+                window.location.href = "secured_page.html"; // Redirect to secured page
+            } else {
+                alert("Invalid username or password.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Register</h2>
+    <form>
+        <label for="regUsername">Username:</label>
+        <input type="text" id="regUsername" name="regUsername"><br><br>
+        <label for="regPassword">Password:</label>
+        <input type="password" id="regPassword" name="regPassword"><br><br>
+        <button type="button" onclick="register()">Register</button>
+    </form>
+
+    <h2>Login</h2>
+    <form>
+        <label for="loginUsername">Username:</label>
+        <input type="text" id="loginUsername" name="loginUsername"><br><br>
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" name="loginPassword"><br><br>
+        <button type="button" onclick="login()">Login</button>
+    </form>
+</body></center>
+</html>
